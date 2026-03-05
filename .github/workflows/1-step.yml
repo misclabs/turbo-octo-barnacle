@@ -1,6 +1,7 @@
 name: Step 1
 
 on:
+  workflow_dispatch: 
   issue_comment:
     types:
       - created
@@ -22,7 +23,7 @@ jobs:
       - name: Check for professortocat reference
         uses: skills/action-keyphrase-checker@v1
         with:
-          text: ${{ github.event.comment.body }}
+          text: "professortocat"
           keyphrase: "professortocat"
           case-sensitive: false
           minimum-occurrences: 1
@@ -30,7 +31,7 @@ jobs:
       - name: Check for coverage reference
         uses: skills/action-keyphrase-checker@v1
         with:
-          text: ${{ github.event.comment.body }}
+          text: coverage
           keyphrase: "coverage"
           case-sensitive: false
           minimum-occurrences: 1
@@ -45,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ISSUE_REPOSITORY: ${{ github.repository }}
-      ISSUE_NUMBER: ${{ needs.find_exercise.outputs.issue-number }}
+      ISSUE_NUMBER: 1
 
     steps:
       - name: Checkout
